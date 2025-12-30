@@ -10,6 +10,7 @@ const CreateIssue = () => {
   const handleSubmit = async (data) => {
     try {
       await createIssue(data);
+      alert('Issue created successfully! 🎉');
       navigate('/');
     } catch (err) {
       setError(err);
@@ -17,11 +18,10 @@ const CreateIssue = () => {
   };
 
   return (
-    <div>
-      <h1>Create Issue</h1>
-      {error && <p>Error: {error}</p>}
-      <IssueForm onSubmit={handleSubmit} />
-    </div>
+    <>
+      {error && <div className="error" style={{position: 'fixed', top: 20, right: 20, zIndex: 1000, maxWidth: '400px'}}>{error}</div>}
+      <IssueForm onSubmit={handleSubmit} title="Create New Issue" />
+    </>
   );
 };
 

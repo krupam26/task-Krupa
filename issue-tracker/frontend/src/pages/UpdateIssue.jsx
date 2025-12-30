@@ -27,21 +27,21 @@ const UpdateIssue = () => {
   const handleSubmit = async (data) => {
     try {
       await updateIssue(id, data);
+      alert('Issue updated successfully! ✅');
       navigate('/');
     } catch (err) {
       setError(err);
     }
   };
 
-  if (loading) return <p>Loading...</p>;
-  if (error) return <p>Error: {error}</p>;
+  if (loading) return <div className="loading">Loading issue...</div>;
+  if (error) return <div className="error">Error: {error}</div>;
 
   return (
-    <div>
-      <h1>Update Issue</h1>
-      {error && <p>Error: {error}</p>}
-      <IssueForm initialValues={initialValues} onSubmit={handleSubmit} />
-    </div>
+    <>
+      {error && <div className="error" style={{position: 'fixed', top: 20, right: 20, zIndex: 1000, maxWidth: '400px'}}>{error}</div>}
+      <IssueForm initialValues={initialValues} onSubmit={handleSubmit} title="Update Issue" />
+    </>
   );
 };
 
